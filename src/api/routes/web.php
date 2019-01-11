@@ -15,6 +15,8 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+$router->post  ('/auth',          ['uses' => 'AuthController@authenticate']);
+
 $router->get   ('/services',      ['uses' => 'ServiceController@index']);
 $router->get   ('/services/{id}', ['uses' => 'ServiceController@show']);
 $router->post  ('/services',      ['uses' => 'ServiceController@create']);
