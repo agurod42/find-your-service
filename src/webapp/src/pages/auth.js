@@ -23,7 +23,7 @@ class AuthPage extends React.Component {
           <Form onSubmit={(e) => this.onFormSubmit(e)}>
             <Form.Item>
               {this.renderFormItem('email', 
-                <Input type='email' placeholder='Email' prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />} />
+                <Input autoFocus type='email' placeholder='Email' prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />} />
               )}
             </Form.Item>
             <Form.Item>

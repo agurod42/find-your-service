@@ -6,7 +6,7 @@ export default class IndexPage extends React.Component {
 
   render() {
     if (AuthService.isUserAuthenticated()) {
-      return <Redirect to='services' />;
+      return <Redirect to='service' />;
     }
     else {
       return <Redirect to='auth' />;

@@ -15,7 +15,7 @@ export const withApiUtils = () => (WrappedComponent) => {
         }
 
         errorHandler(err, next) {
-            if (err.response.status === 403) {
+            if (err.response && err.response.status === 403) {
                 AuthService.deauthenticate();
                 this.setState({ redirect: '/' })
             }
