@@ -1,6 +1,9 @@
 {
     "name": "agurodriguez/find-your-service",
     "description": "",
+    "require": {
+        "ext-mbstring": "*"
+    },
     "scripts": {
         "compile": "composer install -d src/api"
     }
