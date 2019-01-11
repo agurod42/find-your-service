@@ -1,13 +1,7 @@
 {
     "name": "agurodriguez/find-your-service",
     "description": "",
-    "repositories": [
-        {
-            "type": "path",
-            "url": "src/api"
-        }
-    ],
-    "require": {
-        "agurodriguez/find-your-service-api": "*"
+    "scripts": {
+        "compile": "composer install -d src/api"
     }
 }
