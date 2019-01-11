@@ -10,6 +10,18 @@
 			"item": [
 				{
 					"name": "authenticate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fa259ace-bdcd-471a-b3ce-4d4237b7a515",
+								"exec": [
+									"pm.environment.set(\"authToken\", JSON.parse(responseBody).token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -69,28 +81,65 @@
 					"response": []
 				},
 				{
-					"name": "show",
+					"name": "indexByDistance",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{apiUrl}}/services/1?X-Auth-Token={{authToken}}",
+							"raw": "{{apiUrl}}/services?distance=300&distance_to=44.7806,-71.26684",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"services"
+							],
+							"query": [
+								{
+									"key": "distance",
+									"value": "300"
+								},
+								{
+									"key": "distance_to",
+									"value": "44.7806,-71.26684"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiUrl}}/services/1",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
 								"services",
 								"1"
-							],
-							"query": [
-								{
-									"key": "X-Auth-Token",
-									"value": "{{authToken}}"
-								}
 							]
 						}
 					},
