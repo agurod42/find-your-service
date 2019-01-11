@@ -6,13 +6,52 @@
 	},
 	"item": [
 		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "authenticate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"me@agurodriguez.net\",\n\t\"password\": \"password1\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/auth",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Service",
 			"item": [
 				{
 					"name": "index",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": ""
@@ -39,13 +78,19 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{apiUrl}}/services/1",
+							"raw": "{{apiUrl}}/services/1?X-Auth-Token={{authToken}}",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
 								"services",
 								"1"
+							],
+							"query": [
+								{
+									"key": "X-Auth-Token",
+									"value": "{{authToken}}"
+								}
 							]
 						}
 					},
@@ -58,8 +103,12 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"name": "Content-Type",
 								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{authToken}}",
 								"type": "text"
 							}
 						],
@@ -86,9 +135,13 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{authToken}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -111,18 +164,22 @@
 				{
 					"name": "delete",
 					"request": {
-						"method": "PUT",
+						"method": "DELETE",
 						"header": [
 							{
 								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-Auth-Token",
+								"value": "{{authToken}}",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"location_lat\": 46.78065,\n\t\"location_lon\": -71.26684\n}"
+							"raw": ""
 						},
 						"url": {
 							"raw": "{{apiUrl}}/services/1",

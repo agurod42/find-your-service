@@ -11,14 +11,15 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+$router->post('auth', ['uses' => 'AuthController@authenticate']);
 
-$router->post  ('/auth',          ['uses' => 'AuthController@authenticate']);
-
-$router->get   ('/services',      ['uses' => 'ServiceController@index']);
-$router->get   ('/services/{id}', ['uses' => 'ServiceController@show']);
-$router->post  ('/services',      ['uses' => 'ServiceController@create']);
-$router->put   ('/services/{id}', ['uses' => 'ServiceController@update']);
-$router->delete('/services/{id}', ['uses' => 'ServiceController@delete']);
+$router->group(
+    ['middleware' => 'jwt.auth'], 
+    function() use ($router) {
+        $router->get   ('services',      ['uses' => 'ServiceController@index']);
+        $router->get   ('services/{id}', ['uses' => 'ServiceController@show']);
+        $router->post  ('services',      ['uses' => 'ServiceController@create']);
+        $router->put   ('services/{id}', ['uses' => 'ServiceController@update']);
+        $router->delete('services/{id}', ['uses' => 'ServiceController@delete']);
+    }
+);
