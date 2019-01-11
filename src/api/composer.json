@@ -1,5 +1,5 @@
 {
-    "name": "laravel/lumen",
+    "name": "agurodriguez/find-your-service-api",
     "description": "The Laravel Lumen Framework.",
     "keywords": ["framework", "laravel", "lumen"],
     "license": "MIT",
