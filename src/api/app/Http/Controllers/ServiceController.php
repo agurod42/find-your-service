@@ -4,12 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ServiceController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Service::all());
+        if ($distance = $request->input('distance')) {
+            return $this->indexByDistance($request);
+        }
+        else {
+            return response()->json($Service::all());
+        }
+    }
+
+    private function indexByDistance(Request $request) {
+        $distance = $request->input('distance');
+        $distance_to = explode(',', $request->input('distance_to'));
+        $haversine = Service::haversine($distance_to[0], $distance_to[1]);
+
+        return response()->json(DB::select(
+            "SELECT *, $haversine AS distance 
+            FROM services 
+            WHERE $haversine < $distance"
+        ));
     }
 
     public function show($id)
