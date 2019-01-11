@@ -1,0 +1,9 @@
+{
+    "name": "agurodriguez/find-your-service",
+    "description": "",
+    "scripts": {
+        "post-install-cmd": [
+            "composer install -d src/api/"
+        ]
+    }
+}
