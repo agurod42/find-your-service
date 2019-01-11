@@ -1,12 +1,16 @@
-import { Card } from 'antd';
 import React from 'react';
+import { Redirect } from 'react-router';
+import AuthService from '@/services/auth';
 
-export default class extends React.Component {
+export default class IndexPage extends React.Component {
 
   render() {
-    return (
-      <Card />
-    );
+    if (AuthService.isUserAuthenticated()) {
+      return <Redirect to='services' />;
+    }
+    else {
+      return <Redirect to='auth' />;
+    }
   }
 
 }

@@ -14,7 +14,7 @@ class ServiceController extends Controller
             return $this->indexByDistance($request);
         }
         else {
-            return response()->json($Service::all());
+            return response()->json(Service::all());
         }
     }
 

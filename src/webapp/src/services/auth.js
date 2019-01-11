@@ -5,13 +5,17 @@ class AuthService {
     authenticate(email, password) {
         return  api.request('post', 'auth', { email: email, password: password })
                     .then(res => {
-                        localStorage.setItem('token', res.data.token);
+                        api.authToken.set(res.data.token);
                         return res;
                     });
     }
 
+    deauthenticate() {
+        api.authToken.set(undefined);
+    }
+
     isUserAuthenticated() {
-        localStorage.getItem('token') !== undefined;
+        return api.authToken.get() != 'undefined';
     }
 
 }
