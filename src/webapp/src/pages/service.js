@@ -10,6 +10,7 @@ import ServiceService from '@/services/service';
 class ServicePage extends React.Component {
 
   state = {
+    modalData: {},
     modalMode: 'add',
     modalVisible: false,
     services: []
@@ -28,7 +29,7 @@ class ServicePage extends React.Component {
     return (
       <Card 
         title='Services' 
-        extra={<Button type='primary' icon='plus' onClick={() => this.setState({ modalVisible: true })}>Add Service</Button>}
+        extra={<Button type='primary' icon='plus' onClick={() => this.setState({ modalData: {}, modalMode: 'add', modalVisible: true })}>Add Service</Button>}
         style={{ width: '100%' }}>
           <Table
             size='small'
@@ -46,9 +47,10 @@ class ServicePage extends React.Component {
             rowKey='id'
           />
           <ServiceModal
+            data={this.state.modalData}
             mode={this.state.modalMode}
             visible={this.state.modalVisible}
-            onOk={this.handleOk}
+            onOk={(_, data) => this.onOkButtonClick(data)}
             onCancel={() => this.setState({ modalVisible: false })}
           />
       </Card>
@@ -58,10 +60,30 @@ class ServicePage extends React.Component {
   renderRowActions(service) {
     return (
       <div>
-        <Button type='default' icon='edit' />
+        <Button type='default' icon='edit' onClick={() => this.onEditButtonClick(service)} />
         <Button type='danger' icon='delete' onClick={() => this.onDeleteButtonClick(service)} />
       </div>
     )
+  }
+
+  onOkButtonClick(service) {
+    if (this.state.modalMode === 'add') {
+      ServiceService
+          .create(service)
+          .then(res => this.setState({ modalVisible: false, services: res.data }))
+    }
+    else if (this.state.modalMode === 'edit') {
+        ServiceService
+            .update(this.state.modalData.id, service)
+            .then(res => this.setState({ modalVisible: false, services: res.data }))
+    }
+  }
+
+  onEditButtonClick(service) {
+    ServiceService
+      .show(service.id)
+      .then(res => this.setState({ modalData: res.data, modalMode: 'edit', modalVisible: true }))
+      .catch(err => this.props.apiUtils.errorHandler(err, () => this.setState({ error: err })));
   }
 
   onDeleteButtonClick(service) {

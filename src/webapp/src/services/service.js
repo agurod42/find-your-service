@@ -6,7 +6,8 @@ class ServiceService { // hehe :D
         return api.request('get', 'services', q);
     }
 
-    show() {
+    show(id) {
+        return api.request('get', `services/${id}`);
     }
 
     create(data) {

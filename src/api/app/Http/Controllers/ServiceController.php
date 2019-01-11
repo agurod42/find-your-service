@@ -40,7 +40,7 @@ class ServiceController extends Controller
     {
         $service = Service::create($request->all());
 
-        return response()->json($service, 201);
+        return response()->json(Service::all(), 200);
     }
 
     public function update($id, Request $request)
@@ -48,12 +48,13 @@ class ServiceController extends Controller
         $service = Service::findOrFail($id);
         $service->update($request->all());
 
-        return response()->json($service, 200);
+        return response()->json(Service::all(), 200);
     }
 
     public function delete($id)
     {
         Service::findOrFail($id)->delete();
+
         return response()->json(Service::all(), 200);
     }
 }

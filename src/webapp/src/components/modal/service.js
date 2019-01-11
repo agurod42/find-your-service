@@ -16,9 +16,11 @@ export default class ServiceModal extends React.Component {
         return (
             <Modal
                 {...this.props}
+                destroyOnClose
                 title={this.renderTitle()}
                 onOk={() => this.onOkButtonClick()}>
                     <ServiceForm
+                        data={this.props.data}
                         ref={this.formRef} 
                     />
             </Modal>
@@ -29,25 +31,10 @@ export default class ServiceModal extends React.Component {
         return `${this.props.mode[0].toUpperCase()}${this.props.mode.substr(1)} Service`;
     }
 
-    onOkButtonClick() {
-        const data = this.formRef.current.getForm().getFieldsValue();
-        if (this.props.mode === 'add') {
-            ServiceService
-                .create(data)
-                .then(res => {
-                    if (typeof this.props.onServiceCreated === 'function') {
-                        this.props.onServiceCreated(res.data);
-                    }
-                });
-        }
-        else if (this.props.mode === 'edit') {
-            ServiceService
-                .update(data.id, data)
-                .then(res => {
-                    if (typeof this.props.onServiceUpdated === 'function') {
-                        this.props.onServiceUpdated(res.data);
-                    }
-                });
+    onOkButtonClick(e) {
+        if (typeof this.props.onOk === 'function') {
+            const data = this.formRef.current.getForm().getFieldsValue();
+            this.props.onOk(e, data);
         }
     }
 
