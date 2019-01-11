@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "634f5ee9-e23d-4b49-aa02-9bc6e7392105",
+		"name": "FindYourService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Service",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiUrl}}/services",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiUrl}}/services/1",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"services",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Test Service\",\n\t\"description\": \"Service created in order to test the FYS platform\",\n\t\"address\": \"2255 rue de l'Université\",\n\t\"city\": \"Québec\",\n\t\"state\": \"Quebec\",\n\t\"zip_code\": 10000,\n\t\"location_lat\": 46.78060,\n\t\"location_lon\": -71.26684\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/services",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"location_lat\": 46.78065,\n\t\"location_lon\": -71.26684\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/services/1",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"services",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"location_lat\": 46.78065,\n\t\"location_lon\": -71.26684\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/services/1",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"services",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

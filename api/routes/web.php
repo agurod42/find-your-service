@@ -14,3 +14,9 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->get   ('/services',      ['uses' => 'ServiceController@index']);
+$router->get   ('/services/{id}', ['uses' => 'ServiceController@show']);
+$router->post  ('/services',      ['uses' => 'ServiceController@create']);
+$router->put   ('/services/{id}', ['uses' => 'ServiceController@update']);
+$router->delete('/services/{id}', ['uses' => 'ServiceController@delete']);
