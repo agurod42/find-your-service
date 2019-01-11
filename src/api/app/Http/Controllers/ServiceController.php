@@ -18,7 +18,8 @@ class ServiceController extends Controller
         }
     }
 
-    private function indexByDistance(Request $request) {
+    private function indexByDistance(Request $request) 
+    {
         $distance = $request->input('distance');
         $distance_to = explode(',', $request->input('distance_to'));
         $haversine = Service::haversine($distance_to[0], $distance_to[1]);
@@ -53,6 +54,6 @@ class ServiceController extends Controller
     public function delete($id)
     {
         Service::findOrFail($id)->delete();
-        return response()->json('OK', 200);
+        return response()->json(Service::all(), 200);
     }
 }

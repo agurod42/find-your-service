@@ -40,7 +40,7 @@ class ServicePage extends React.Component {
               { dataIndex: 'state', title: 'State' },
               { dataIndex: 'zip_code', title: 'ZIP Code' },
               { dataIndex: 'location', title: 'Location', render: (_, record) => `${record.location_lat},${record.location_lon}` },
-              { render: () => this.renderRowActions() }
+              { render: (_, record) => this.renderRowActions(record) }
             ]}
             dataSource={this.state.services} 
             rowKey='id'
@@ -55,13 +55,20 @@ class ServicePage extends React.Component {
     );
   }
 
-  renderRowActions() {
+  renderRowActions(service) {
     return (
       <div>
         <Button type='default' icon='edit' />
-        <Button type='danger' icon='delete' />
+        <Button type='danger' icon='delete' onClick={() => this.onDeleteButtonClick(service)} />
       </div>
     )
+  }
+
+  onDeleteButtonClick(service) {
+    ServiceService
+      .delete(service.id)
+      .then(res => this.setState({ services: res.data }))
+      .catch(err => this.props.apiUtils.errorHandler(err, () => this.setState({ error: err })));
   }
 
 }

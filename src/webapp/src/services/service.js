@@ -17,6 +17,10 @@ class ServiceService { // hehe :D
         return api.request('put', `services/${id}`, data);
     }
 
+    delete(id) {
+        return api.request('delete', `services/${id}`);
+    }
+
 }
 
 export default new ServiceService();
