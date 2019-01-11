@@ -5,6 +5,9 @@
         "ext-mbstring": "*"
     },
     "scripts": {
-        "compile": "composer install -d src/api"
+        "compile": [
+            "composer install -d src/api",
+            "cd src/api && php artisan db:seed && cd ../.."
+        ]
     }
 }
