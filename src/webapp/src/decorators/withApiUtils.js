@@ -17,7 +17,7 @@ export const withApiUtils = () => (WrappedComponent) => {
         errorHandler(err, next) {
             if (err.response && err.response.status === 403) {
                 AuthService.deauthenticate();
-                this.setState({ redirect: '/' })
+                this.setState({ redirect: true })
             }
             else {
                 next(err);
@@ -26,7 +26,7 @@ export const withApiUtils = () => (WrappedComponent) => {
 
         render() {
             if (this.state.redirect) {
-                return <Redirect to={this.state.redirect} />;
+                return <Redirect to='/' />;
             }
             else {
                 return <WrappedComponent {...this.props} apiUtils={this.apiUtils} />;

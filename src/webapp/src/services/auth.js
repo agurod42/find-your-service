@@ -15,7 +15,7 @@ class AuthService {
     }
 
     isUserAuthenticated() {
-        return api.authToken.get() != 'undefined';
+        return api.authToken.get() !== null;
     }
 
 }

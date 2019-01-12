@@ -5,10 +5,10 @@ import AuthService from '@/services/auth';
 export const withAuthGuard = () => (WrappedComponent) => {
 
     return class extends React.Component {
-    
+
         render() {
             if (!AuthService.isUserAuthenticated()) {
-                return <Redirect to={this.state.redirect} />;
+                return <Redirect to='/' />;
             }
             else {
                 return <WrappedComponent {...this.props} />;
