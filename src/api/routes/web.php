@@ -36,6 +36,8 @@ $router->group(['prefix' => 'webapp'], function () use ($router) {
         $filePath = __DIR__.'/../../webapp/dist/'.$any;
         if (file_exists($filePath)) {
             $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            var_dump(finfo_file($finfo, $filePath));
+            exit;
             header('Content-Type: '.finfo_file($finfo, $filePath));
             finfo_close($finfo);
             echo file_get_contents($filePath);
