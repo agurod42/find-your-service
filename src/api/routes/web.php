@@ -13,11 +13,6 @@ use Illuminate\Support\Facades\File;
 |
 */
 
-$router->get('webapp[/{slug}]', function ($slug = null) {
-    if (empty($slug)) $slug = 'index.html';
-    return File::get(__DIR__.'/../../webapp/dist/'.$slug);
-});
-
 $router->post('auth', ['uses' => 'AuthController@authenticate']);
 
 $router->group(
@@ -30,3 +25,12 @@ $router->group(
         $router->delete('services/{id}', ['uses' => 'ServiceController@delete']);
     }
 );
+
+$router->group(['prefix' => 'webapp'], function () use ($router) {
+    $router->get('/', function () {
+        return File::get(__DIR__.'/../../webapp/dist/index.html');
+    });
+    $router->get('/{any:.*}', function ($any = null) {
+        return File::get(__DIR__.'/../../webapp/dist/'.$any);
+    });
+});

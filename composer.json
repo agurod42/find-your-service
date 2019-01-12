@@ -7,9 +7,7 @@
     "scripts": {
         "compile": [
             "composer install -d src/api",
-            "cd src/api && php artisan migrate && php artisan db:seed && cd ../..",
-            "curl -o- -L https://yarnpkg.com/install.sh | bash",
-            "cd src/webapp && yarn install && UMI_ENV=production ./node_modules/.bin/umi build && cd ../.."
+            "cd src/api && php artisan migrate && php artisan db:seed && cd ../.."
         ]
     }
 }
