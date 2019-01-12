@@ -10,14 +10,14 @@ class ServiceForm extends React.Component {
 
     render() {
         return (
-            <Form>
+            <Form onSubmit={(e) => this.onFormSubmit(e)}>
                 {this.renderFormItem('email', 'Email', '',
                     <Input autoFocus type='email' placeholder='Email' prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />} />
                 )}{this.renderFormItem('password', 'Password', '',
                     <Input type='password' placeholder='Password' prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />} />
                 )}
                 <Form.Item>
-                    <Button type='primary' loading={this.props.loading} onClick={() => this.onOkButtonClick()}>Login</Button>
+                    <Button type='primary' htmlType='submit' loading={this.props.loading}>Login</Button>
                 </Form.Item>
             </Form>
         );
@@ -31,7 +31,9 @@ class ServiceForm extends React.Component {
         );
     }
 
-    onOkButtonClick() {
+    onFormSubmit(e) {
+        e.preventDefault();
+
         this.props.form.validateFields((err) => {
             if (err) return;
             else if (typeof this.props.onSubmit === 'function') {
