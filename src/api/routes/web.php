@@ -35,13 +35,11 @@ $router->group(['prefix' => 'webapp'], function () use ($router) {
     $router->get('/{any:.*}', function ($any = null) {
         $filePath = __DIR__.'/../../webapp/dist/'.$any;
         if (file_exists($filePath)) {
-            $finfo = finfo_open(FILEINFO_MIME_TYPE);
-            var_dump(finfo_file($finfo, $filePath));
-            exit;
-            header('Content-Type: '.finfo_file($finfo, $filePath));
-            finfo_close($finfo);
+            $fileNameParts = explode('.', $any);
+            $fileExt = strtolower($fileNameParts[count($fileNameParts) - 1]);
+            if ($fileExt === 'css') header('Content-Type: text/css');
+            else if ($fileExt === 'js') header('Content-Type: text/javascript');
             echo file_get_contents($filePath);
-            exit;
         }
         else {
             return File::get(__DIR__.'/../../webapp/dist/index.html');
