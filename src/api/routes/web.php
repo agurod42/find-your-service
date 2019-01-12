@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\File;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -10,6 +12,11 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
+
+$router->get('webapp[/{slug}]', function ($slug = null) {
+    if (empty($slug)) $slug = 'index.html';
+    return File::get(__DIR__.'/../../webapp/dist/'.$slug);
+});
 
 $router->post('auth', ['uses' => 'AuthController@authenticate']);
 
