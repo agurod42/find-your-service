@@ -27,11 +27,22 @@ $router->group(
 );
 
 $router->group(['prefix' => 'webapp'], function () use ($router) {
+
     $router->get('/', function () {
         return File::get(__DIR__.'/../../webapp/dist/index.html');
     });
+
     $router->get('/{any:.*}', function ($any = null) {
         $filePath = __DIR__.'/../../webapp/dist/'.$any;
-        return File::get(file_exists($filePath) ? $filePath : __DIR__.'/../../webapp/dist/index.html');
+        if (file_exists($filePath)) {
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            header('Content-Type: '.finfo_file($finfo, $filePath));
+            finfo_close($finfo);
+            return File::get($filePath);
+        }
+        else {
+            return File::get(__DIR__.'/../../webapp/dist/index.html');
+        }
     });
+    
 });
