@@ -29,7 +29,7 @@ export default class extends React.Component {
 
   onLogoutButtonClick() {
     AuthService.deauthenticate();
-    window.location.href = '/';
+    this.props.history.push('/');
   }
 
 }

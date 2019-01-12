@@ -41,7 +41,7 @@ class AuthPage extends React.Component {
     AuthService
       .authenticate(data.email, data.password)
       .then(() => {
-        window.location.href = '/';
+        this.props.history.push('/');
       })
       .catch(err => {
         this.setState({ error: err.response.data.error, loading: false });
