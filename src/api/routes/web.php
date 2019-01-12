@@ -26,14 +26,14 @@ $router->group(
     }
 );
 
-$router->group(['prefix' => 'webapp'], function () use ($router) {
+$router->group(['prefix' => 'admin'], function () use ($router) {
 
     $router->get('/', function () {
-        return File::get(__DIR__.'/../../webapp/dist/index.html');
+        return File::get(__DIR__.'/../../webapp-admin/dist/index.html');
     });
 
     $router->get('/{any:.*}', function ($any = null) {
-        $filePath = __DIR__.'/../../webapp/dist/'.$any;
+        $filePath = __DIR__.'/../../webapp-admin/dist/'.$any;
         if (file_exists($filePath)) {
             $fileNameParts = explode('.', $any);
             $fileExt = strtolower($fileNameParts[count($fileNameParts) - 1]);
@@ -42,7 +42,7 @@ $router->group(['prefix' => 'webapp'], function () use ($router) {
             echo file_get_contents($filePath);
         }
         else {
-            return File::get(__DIR__.'/../../webapp/dist/index.html');
+            return File::get(__DIR__.'/../../webapp-admin/dist/index.html');
         }
     });
 
