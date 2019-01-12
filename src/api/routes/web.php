@@ -39,6 +39,7 @@ $router->group(['prefix' => 'webapp'], function () use ($router) {
             header('Content-Type: '.finfo_file($finfo, $filePath));
             finfo_close($finfo);
             echo file_get_contents($filePath);
+            exit;
         }
         else {
             return File::get(__DIR__.'/../../webapp/dist/index.html');
