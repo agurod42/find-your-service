@@ -38,11 +38,11 @@ $router->group(['prefix' => 'webapp'], function () use ($router) {
             $finfo = finfo_open(FILEINFO_MIME_TYPE);
             header('Content-Type: '.finfo_file($finfo, $filePath));
             finfo_close($finfo);
-            return File::get($filePath);
+            echo file_get_contents($filePath);
         }
         else {
             return File::get(__DIR__.'/../../webapp/dist/index.html');
         }
     });
-    
+
 });
