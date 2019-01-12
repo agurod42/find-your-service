@@ -1,6 +1,5 @@
 import { Button, Col, Layout, Menu, Row } from 'antd';
 import React from 'react';
-import NavLink from 'umi/navlink';
 import AuthService from '@/services/auth';
 
 export default class extends React.Component {

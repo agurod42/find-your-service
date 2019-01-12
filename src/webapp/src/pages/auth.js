@@ -1,16 +1,15 @@
-import { Alert, Button, Card, Form, Icon, Input, Layout } from 'antd';
+import { Alert, Card, Form, Layout } from 'antd';
 import React from 'react';
+import AuthForm from '@/components/form/auth';
 import AuthService from '@/services/auth';
 
 class AuthPage extends React.Component {
 
-  formRules = {
-    email: [{ required: true, message: 'Email is required' }],
-    password: [{ required: true, message: 'Password is required' }],
-  }
+  formRef = React.createRef()
 
   state = {
-    error: false
+    error: false,
+    loading: false
   }
 
   render() {
@@ -20,23 +19,11 @@ class AuthPage extends React.Component {
           {this.state.error &&
             <Alert type='error' closable message='Login failed' description={this.state.error} />
           }
-          <Form onSubmit={(e) => this.onFormSubmit(e)}>
-            <Form.Item>
-              {this.renderFormItem('email', 
-                <Input autoFocus type='email' placeholder='Email' prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />} />
-              )}
-            </Form.Item>
-            <Form.Item>
-              {this.renderFormItem('password', 
-                <Input type='password' placeholder='Password' prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />} />
-              )}
-            </Form.Item>
-            <Form.Item>
-              <Button type='primary' htmlType='submit'>
-                Login
-              </Button>
-            </Form.Item>
-          </Form>
+          <AuthForm
+            ref={this.formRef}
+            loading={this.state.loading}
+            onSubmit={() => this.onFormSubmit()}
+          />
         </Card>
       </Layout.Content>
     );
@@ -46,21 +33,19 @@ class AuthPage extends React.Component {
     return this.props.form.getFieldDecorator(name, { rules: this.formRules[name] })(children);
   }
 
-  onFormSubmit(e) {
-    e.preventDefault();
-    
-    this.props.form.validateFields((err, v) => {
-      if (!err) {
-        AuthService
-          .authenticate(v.email, v.password)
-          .then(() => {
-            window.location.href = '/';
-          })
-          .catch(err => {
-            this.setState({ error: err.response.data.error });
-          })
-      }
-    });
+  onFormSubmit() {
+    this.setState({ loading: true });
+
+    const data = this.formRef.current.getForm().getFieldsValue();
+
+    AuthService
+      .authenticate(data.email, data.password)
+      .then(() => {
+        window.location.href = '/';
+      })
+      .catch(err => {
+        this.setState({ error: err.response.data.error, loading: false });
+      });
   }
 
 }
