@@ -31,6 +31,7 @@ $router->group(['prefix' => 'webapp'], function () use ($router) {
         return File::get(__DIR__.'/../../webapp/dist/index.html');
     });
     $router->get('/{any:.*}', function ($any = null) {
-        return File::get(__DIR__.'/../../webapp/dist/'.$any);
+        $filePath = __DIR__.'/../../webapp/dist/'.$any;
+        return File::get(file_exists($filePath) ? filePath : __DIR__.'/../../webapp/dist/index.html');
     });
 });
