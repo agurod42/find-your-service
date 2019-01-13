@@ -18,15 +18,13 @@ You can find running instances on:
 
 ## Install
 
-### Manual
+### Heroku
 
-<!-- TODO -->
-
-### Deploy to Heroku
-
-https://heroku.com/deploy?template=https://github.com/agurodriguez/find-your-service/tree/master
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/agurodriguez/find-your-service/tree/master)
 
 ### Docker
+
+
 
 <!-- TODO -->
 
