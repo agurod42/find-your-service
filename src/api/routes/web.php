@@ -13,12 +13,16 @@ use Illuminate\Support\Facades\File;
 |
 */
 
+// public routes
+
 $router->post('auth', ['uses' => 'AuthController@authenticate']);
+$router->get('services', ['uses' => 'ServiceController@index']);
+
+// private routes
 
 $router->group(
     ['middleware' => 'jwt.auth'], 
     function() use ($router) {
-        $router->get   ('services',      ['uses' => 'ServiceController@index']);
         $router->get   ('services/{id}', ['uses' => 'ServiceController@show']);
         $router->post  ('services',      ['uses' => 'ServiceController@create']);
         $router->put   ('services/{id}', ['uses' => 'ServiceController@update']);
@@ -26,24 +30,31 @@ $router->group(
     }
 );
 
-$router->group(['prefix' => 'admin'], function () use ($router) {
+// react app's routes
 
-    $router->get('/', function () {
-        return File::get(__DIR__.'/../../webapp-admin/dist/index.html');
+function routeReactApp($router, $route, $reactAppPath) {
+    $router->group(['prefix' => $route], function () use ($router) {
+
+        $router->get('/', function () {
+            return File::get($reactAppPath.'/index.html');
+        });
+
+        $router->get('/{any:.*}', function ($any = null) {
+            $filePath = $reactAppPath.'/./'.$any;
+            if (file_exists($filePath)) {
+                $fileNameParts = explode('.', $any);
+                $fileExt = strtolower($fileNameParts[count($fileNameParts) - 1]);
+                if ($fileExt === 'css') header('Content-Type: text/css');
+                else if ($fileExt === 'js') header('Content-Type: text/javascript');
+                echo file_get_contents($filePath);
+            }
+            else {
+                return File::get($reactAppPath.'/index.html');
+            }
+        });
+        
     });
+}
 
-    $router->get('/{any:.*}', function ($any = null) {
-        $filePath = __DIR__.'/../../webapp-admin/dist/'.$any;
-        if (file_exists($filePath)) {
-            $fileNameParts = explode('.', $any);
-            $fileExt = strtolower($fileNameParts[count($fileNameParts) - 1]);
-            if ($fileExt === 'css') header('Content-Type: text/css');
-            else if ($fileExt === 'js') header('Content-Type: text/javascript');
-            echo file_get_contents($filePath);
-        }
-        else {
-            return File::get(__DIR__.'/../../webapp-admin/dist/index.html');
-        }
-    });
-
-});
+routeReactApp($router, 'admin', __DIR__.'/../../webapp-admin/dist');
+routeReactApp($router, 'public', __DIR__.'/../../webapp-public/dist');

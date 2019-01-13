@@ -10,25 +10,21 @@ class ServiceController extends Controller
 {
     public function index(Request $request)
     {
-        if ($distance = $request->input('distance')) {
-            return $this->indexByDistance($request);
-        }
-        else {
-            return response()->json(Service::all());
-        }
-    }
+        $table = DB::table('services')->select('*');
 
-    private function indexByDistance(Request $request) 
-    {
-        $distance = $request->input('distance');
-        $distance_to = explode(',', $request->input('distance_to'));
-        $haversine = Service::haversine($distance_to[0], $distance_to[1]);
+        if ($request->has('title')) {
+            $table->where('title', 'like', '%'.$request->input('title').'%');
+        }
 
-        return response()->json(DB::select(
-            "SELECT *, $haversine AS distance 
-            FROM services 
-            WHERE $haversine < $distance"
-        ));
+        if ($request->has('distance') && $request->has('distance_to')) {
+            $distance = $request->input('distance');
+            $distance_to = explode(',', $request->input('distance_to'));
+            $haversine = Service::haversine($distance_to[0], $distance_to[1]);
+            $table->addSelect(DB::raw("$haversine AS distance"));
+            $table->where(DB::raw($haversine), '<', $distance);
+        }
+        
+        return response()->json($table->get());
     }
 
     public function show($id)

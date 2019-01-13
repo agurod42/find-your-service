@@ -1,5 +1,5 @@
 {
-  "name": "find-your-service-webapp",
+  "name": "find-your-service-webapp-admin",
   "private": true,
   "engines": {
     "node": ">=8.0.0"
