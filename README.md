@@ -34,7 +34,7 @@ https://heroku.com/deploy?template=https://github.com/agurodriguez/find-your-ser
 
 The MIT License
 
-Copyright (c) 2010-2018 Google, Inc. http://angularjs.org
+Copyright (c) 2019 Agustín Rodríguez
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
