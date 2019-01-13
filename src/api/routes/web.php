@@ -35,11 +35,11 @@ $router->group(
 function routeReactApp($router, $route, $reactAppPath) {
     $router->group(['prefix' => $route], function () use ($router) {
 
-        $router->get('/', function () {
+        $router->get('/', function () use ($reactAppPath) {
             return File::get($reactAppPath.'/index.html');
         });
 
-        $router->get('/{any:.*}', function ($any = null) {
+        $router->get('/{any:.*}', function ($any = null) use ($reactAppPath) {
             $filePath = $reactAppPath.'/./'.$any;
             if (file_exists($filePath)) {
                 $fileNameParts = explode('.', $any);
