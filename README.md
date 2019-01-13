@@ -14,7 +14,7 @@ You can find running instances on:
 
 ## Architecture
 
-<!-- Diagram -->
+![](docs/diagrams/deployment.png)
 
 ## Install
 
@@ -23,8 +23,6 @@ You can find running instances on:
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/agurodriguez/find-your-service/tree/master)
 
 ### Docker
-
-
 
 <!-- TODO -->
 
