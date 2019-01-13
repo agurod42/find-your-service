@@ -34,7 +34,7 @@ export default class IndexPage extends React.Component {
         {this.state.geolocation &&
           <Row type='flex' justify='center' style={{ marginTop: 6 }}>
             <Col>
-              <small><Icon type='info-circle' /> Search by distance is relative to <a target='_blank' href={`https://www.google.com.uy/maps/@${this.state.q.distance_to}`}>{this.state.q.distance_to}</a></small>
+              <sub><Icon type='info-circle' /> Search by distance is relative to <a target='_blank' href={`https://www.google.com.uy/maps/@${this.state.q.distance_to}`}>{this.state.q.distance_to}</a></sub>
             </Col>
           </Row>
         }
