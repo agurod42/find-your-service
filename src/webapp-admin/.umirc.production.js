@@ -1,8 +1,8 @@
 
 // ref: https://umijs.org/config/
 export default {
-  base: '/webapp',
-  publicPath: '/webapp/',
+  base: '/admin',
+  publicPath: '/admin/',
   define: {
     'process.env.API_URL': 'https://find-your-service.herokuapp.com'
   },
