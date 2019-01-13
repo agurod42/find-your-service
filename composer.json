@@ -2,7 +2,8 @@
     "name": "agurodriguez/find-your-service",
     "description": "Find Your Service is an application that allow consumers to search for services.",
     "require": {
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+        "squizlabs/php_codesniffer": "3.*"
     },
     "scripts": {
         "checkstyle": [
@@ -13,8 +14,5 @@
             "composer install -d src/api",
             "cd src/api && php artisan migrate && php artisan db:seed && cd ../.."
         ]
-    },
-    "require-dev": {
-        "squizlabs/php_codesniffer": "3.*"
     }
 }
