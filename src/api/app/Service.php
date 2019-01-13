@@ -28,6 +28,6 @@ class Service extends Model
      * Haversine formula (See https://en.wikipedia.org/wiki/Haversine_formula)
      */
     public static function haversine($lat, $lng) {
-        return "( 6371 * acos( cos( radians( $lat ) ) * cos( radians( location_lat ) ) * cos( radians( location_lon ) - radians( $lng ) ) + sin( radians( $lat ) ) * sin( radians( location_lat ) ) ) )";
+        return "( 6371000 * acos( cos( radians( $lat ) ) * cos( radians( location_lat ) ) * cos( radians( location_lon ) - radians( $lng ) ) + sin( radians( $lat ) ) * sin( radians( location_lat ) ) ) )";
     }
 }
