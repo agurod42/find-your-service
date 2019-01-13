@@ -11,10 +11,11 @@ class ServiceController extends Controller
     /**
      * List all services. If parameters are provided then the services are filtered.
      * Available filters:
-     *      `$title`        string    Substring of service's title    
+     *      `$title`        string    Substring of service's title
      *      `$distance`     number    Distance to service from `distance_to`
-     *      `$distance_to`  string    String representing a coordinate in the format $latitude,$longitude from which the distance is calculated
-     * 
+     *      `$distance_to`  string    String representing a coordinate in the format $latitude,$longitude from which
+     *                                the distance is calculated
+     *
      * @param \Illuminate\Http\Request $request
      * @return mixed
      */
@@ -39,7 +40,7 @@ class ServiceController extends Controller
 
     /**
      * Show the service with id `$id`.
-     * 
+     *
      * @param int $id
      * @return mixed
      */
@@ -50,7 +51,7 @@ class ServiceController extends Controller
 
     /**
      * Create a new service and return the full list of services.
-     * 
+     *
      * @param \Illuminate\Http\Request $request
      * @return mixed
      */
@@ -63,7 +64,7 @@ class ServiceController extends Controller
 
     /**
      * Update the service with id `$id` and return the full list of services.
-     * 
+     *
      * @param int $id
      * @param \Illuminate\Http\Request $request
      * @return mixed
@@ -78,7 +79,7 @@ class ServiceController extends Controller
 
     /**
      * Delete the service with id `$id` and return the full list of services.
-     * 
+     *
      * @param int $id
      * @return mixed
      */

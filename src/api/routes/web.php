@@ -21,19 +21,20 @@ $router->get('services', ['uses' => 'ServiceController@index']);
 // private routes
 
 $router->group(
-    ['middleware' => 'jwt.auth'], 
-    function() use ($router) {
-        $router->get   ('services/{id}', ['uses' => 'ServiceController@show']);
-        $router->post  ('services',      ['uses' => 'ServiceController@create']);
-        $router->put   ('services/{id}', ['uses' => 'ServiceController@update']);
+    ['middleware' => 'jwt.auth'],
+    function () use ($router) {
+        $router->get('services/{id}', ['uses' => 'ServiceController@show']);
+        $router->post('services', ['uses' => 'ServiceController@create']);
+        $router->put('services/{id}', ['uses' => 'ServiceController@update']);
         $router->delete('services/{id}', ['uses' => 'ServiceController@delete']);
     }
 );
 
 // react app's routes
 
-function routeReactApp($router, $route, $reactAppPath) {
-    $router->group(['prefix' => $route], function () use ($router, $reactAppPath) {
+foreach (['admin', 'public'] as $route) {
+    $router->group(['prefix' => $route], function () use ($router, $route) {
+        $reactAppPath = __DIR__.'/../../webapp-'.$route.'/dist';
 
         $router->get('/', function () use ($reactAppPath) {
             return File::get($reactAppPath.'/index.html');
@@ -44,17 +45,12 @@ function routeReactApp($router, $route, $reactAppPath) {
             if (file_exists($filePath)) {
                 $fileNameParts = explode('.', $any);
                 $fileExt = strtolower($fileNameParts[count($fileNameParts) - 1]);
-                if ($fileExt === 'css') header('Content-Type: text/css');
-                else if ($fileExt === 'js') header('Content-Type: text/javascript');
+                $fileExtMimeType = ['css' => 'text/css', 'js' => 'text/javascript'];
+                header('Content-Type: '.$fileExtMimeType[$fileExt]);
                 echo file_get_contents($filePath);
-            }
-            else {
+            } else {
                 return File::get($reactAppPath.'/index.html');
             }
         });
-        
     });
 }
-
-routeReactApp($router, 'admin', __DIR__.'/../../webapp-admin/dist');
-routeReactApp($router, 'public', __DIR__.'/../../webapp-public/dist');

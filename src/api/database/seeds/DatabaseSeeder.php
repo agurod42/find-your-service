@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:disable PSR1.Classes.ClassDeclaration
 
 use Illuminate\Database\Seeder;
 

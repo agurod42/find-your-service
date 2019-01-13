@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:disable PSR1.Classes.ClassDeclaration
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +13,6 @@ class ServicesTableSeeder extends Seeder
     public function run()
     {
         if (!DB::table('services')->select()->where(['title' => 'New York Service'])->exists()) {
-
             DB::table('services')->insert([
                 'title' => 'New York Service',
                 'description' => 'Service 0.27km away from New York',
@@ -101,7 +100,6 @@ class ServicesTableSeeder extends Seeder
                 'location_lat' => '41.421535',
                 'location_lon' => '-78.731404'
             ]);
-
         }
     }
 }
