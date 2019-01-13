@@ -1,0 +1,13 @@
+@import '~antd/dist/antd.css';
+
+html, body, #root, #root > .ant-layout {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.ant-table tbody tr td button + button {
+  margin-left: 6px;
+}
