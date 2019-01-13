@@ -1,5 +1,6 @@
 import { Card, Col, Icon, Input, Layout, Row, Select } from 'antd';
 import React from 'react';
+import Img from 'react-image';
 import ServiceService from '@/services/service';
 
 export default class IndexPage extends React.Component {
@@ -40,8 +41,8 @@ export default class IndexPage extends React.Component {
         }
         <Row style={{ marginTop: 24 }} gutter={16}>
           {this.state.services.map(service => (
-            <Col xs={12} md={6} lg={4}>
-              <Card hoverable cover={<img alt={service.title} src={`https://picsum.photos/200/200/?random&t=${service.id}`} />}>
+            <Col xs={12} md={6} lg={4} style={{ marginBottom: 16 }}>
+              <Card hoverable cover={<Img alt={service.title} src={`https://picsum.photos/200/200/?random&t=${service.id}`} />}>
                 <Card.Meta
                   title={service.title}
                   description={service.description}
