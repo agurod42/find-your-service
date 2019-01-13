@@ -1,0 +1,35 @@
+{
+    "name": "Find Your Service",
+    "description": "Find Your Service is an application that allow consumers to search for services. It was made as a test project for a job interview.",
+    "website": "https://github.com/agurodriguez/find-your-service",
+    "repository": "https://github.com/agurodriguez/find-your-service",
+    "env": {
+        "APP_NAME": {
+            "value": "FindYourService"
+        },
+        "DB_CONNECTION": {
+            "value": "pgsql"
+        },
+        "DB_HOST": {
+            "value": "127.0.0.1"
+        },
+        "DB_PORT": {
+            "value": "5432"
+        },
+        "DB_DATABASE": {
+            "value": "fys"
+        },
+        "DB_USERNAME": {
+            "value": "postgres"
+        },
+        "DB_PASSWORD": {
+            "value": "postgres"
+        },
+        "JWT_SECRET": {
+            "generator": "secret"
+        }
+    },
+    "addons": [
+      "heroku-postgresql"
+    ]
+}
