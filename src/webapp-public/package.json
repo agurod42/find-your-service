@@ -24,13 +24,6 @@
     "start": "umi dev",
     "build": "UMI_ENV=production umi build",
     "test": "umi test",
-    "lint": "eslint --ext .js src mock tests",
-    "precommit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,jsx}": [
-      "eslint --fix",
-      "git add"
-    ]
+    "lint": "eslint --ext .js src mock tests"
   }
 }
