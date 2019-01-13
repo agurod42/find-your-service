@@ -12,10 +12,10 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        if (!DB::table('users')->select()->where(['email' => 'me@agurodriguez.net'])->exists()) {
+        if (!DB::table('users')->select()->where(['email' => 'admin@findyourservice.io'])->exists()) {
             DB::table('users')->insert([
-                'email' => 'me@agurodriguez.net',
-                'password' => app('hash')->make('password1')
+                'email' => 'admin@findyourservice.io',
+                'password' => app('hash')->make('password')
             ]);
         }
     }
