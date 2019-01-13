@@ -29,9 +29,11 @@ export default class IndexPage extends React.Component {
             <Input placeholder='Search' prefix={<Icon type='search' />} addonAfter={this.renderDistanceSelect()} onChange={(e) => this.onQueryInputChange(e)} />
           </Col>
         </Row>
-        <Row type='flex' justify='center'>
-
-        </Row>
+        {this.state.geolocation &&
+          <Row type='flex' justify='center'>
+            <Col><Icon type='info-circle' /> Search by distance is relative to <a target='_blank' href={`https://www.google.com.uy/maps/@${this.state.q.distance_to}`}>{this.state.q.distance_to}</a></Col>
+          </Row>
+        }
         <Row style={{ marginTop: 24 }} gutter={16}>
           {this.state.services.map(service => (
             <Col xs={12} md={6} lg={4}>
