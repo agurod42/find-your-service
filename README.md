@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/agurodriguez/find-your-service.svg?branch=master)](https://travis-ci.com/agurodriguez/find-your-service)
 
-Find Your Service is an application that allow consumers to search for services. It was made as a test project for a job interview. The full specification is available [here](docs/FindYourService.com%20-%20Full%202019).
+Find Your Service is an application that allow consumers to search for services. It was made as a test project for a job interview. The full specification is available [here](docs/FindYourService.com%20-%20Full%202019.pdf).
 
 You can find running instances on:
 
