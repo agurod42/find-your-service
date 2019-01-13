@@ -8,6 +8,16 @@ use Illuminate\Support\Facades\DB;
 
 class ServiceController extends Controller
 {
+    /**
+     * List all services. If parameters are provided then the services are filtered.
+     * Available filters:
+     *      `$title`        string    Substring of service's title    
+     *      `$distance`     number    Distance to service from `distance_to`
+     *      `$distance_to`  string    String representing a coordinate in the format $latitude,$longitude from which the distance is calculated
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return mixed
+     */
     public function index(Request $request)
     {
         $table = DB::table('services')->select('*');
@@ -27,11 +37,23 @@ class ServiceController extends Controller
         return response()->json($table->get());
     }
 
+    /**
+     * Show the service with id `$id`.
+     * 
+     * @param int $id
+     * @return mixed
+     */
     public function show($id)
     {
         return response()->json(Service::find($id));
     }
 
+    /**
+     * Create a new service and return the full list of services.
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @return mixed
+     */
     public function create(Request $request)
     {
         $service = Service::create($request->all());
@@ -39,6 +61,13 @@ class ServiceController extends Controller
         return response()->json(Service::all(), 200);
     }
 
+    /**
+     * Update the service with id `$id` and return the full list of services.
+     * 
+     * @param int $id
+     * @param \Illuminate\Http\Request $request
+     * @return mixed
+     */
     public function update($id, Request $request)
     {
         $service = Service::findOrFail($id);
@@ -47,6 +76,12 @@ class ServiceController extends Controller
         return response()->json(Service::all(), 200);
     }
 
+    /**
+     * Delete the service with id `$id` and return the full list of services.
+     * 
+     * @param int $id
+     * @return mixed
+     */
     public function delete($id)
     {
         Service::findOrFail($id)->delete();
