@@ -18,15 +18,18 @@ You can find running instances on:
 
 <p align="center"><img width="50%" src="docs/diagrams/deployment.png" /></p>
 
-### Contributing
+### Code Quality
 
 We use the following coding style standards:
 
-* [src/api](src/api): [PSR-2 Coding Style](https://www.php-fig.org/psr/psr-2/)
+[![PSR-2 Coding Style](https://img.shields.io/badge/api-PSR--2-%234F5D95.svg)](https://www.php-fig.org/psr/psr-2)
+[![StandardJS](https://img.shields.io/badge/webapp--admin-StandardJS-%23f1e05a.svg)](https://standardjs.com)
+[![StandardJS](https://img.shields.io/badge/webapp--public-StandardJS-%23f1e05a.svg)](https://standardjs.com)
 
-The compliance is checked by Travis after every push using `phpcs` and `js` accordingly.
 
-## Install
+Source compliance is checked automatically by Travis after every push. It uses `phpcs` and `eslint` for `php` and `js` sources respectively.
+
+## Deployment
 
 ### Heroku
 
