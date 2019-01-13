@@ -19,6 +19,8 @@ export default class IndexPage extends React.Component {
         });
       });
     }
+
+    this.onQueryInputChange({ target: { value: '' } });
   }
 
   render() {
@@ -37,7 +39,7 @@ export default class IndexPage extends React.Component {
         <Row style={{ marginTop: 24 }} gutter={16}>
           {this.state.services.map(service => (
             <Col xs={12} md={6} lg={4}>
-              <Card hoverable cover={<img alt='example' src='https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png' />}>
+              <Card hoverable cover={<img alt={service.title} src={`https://picsum.photos/200/200/?random&t=${service.id}`} />}>
                 <Card.Meta
                   title={service.title}
                   description={service.description}
