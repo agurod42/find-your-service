@@ -16,7 +16,7 @@ You can find running instances on:
 
 ### Architecture
 
-![](docs/diagrams/deployment.png)
+<p align="center"><img width="50%" src="docs/diagrams/deployment.png" /></p>
 
 ### Contributing
 
