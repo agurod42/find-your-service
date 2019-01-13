@@ -33,7 +33,7 @@ $router->group(
 // react app's routes
 
 function routeReactApp($router, $route, $reactAppPath) {
-    $router->group(['prefix' => $route], function () use ($router) {
+    $router->group(['prefix' => $route], function () use ($router, $reactAppPath) {
 
         $router->get('/', function () use ($reactAppPath) {
             return File::get($reactAppPath.'/index.html');
