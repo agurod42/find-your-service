@@ -7,7 +7,3 @@ html, body, #root, #root > .ant-layout {
 body {
   margin: 0;
 }
-
-.ant-table tbody tr td button + button {
-  margin-left: 6px;
-}
