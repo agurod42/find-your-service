@@ -12,9 +12,19 @@ You can find running instances on:
 
 <sub>To log into the Admin site you should use the following credentials: (admin@findyourservice.io, password)</sub>
 
-## Architecture
+## Development
+
+### Architecture
 
 ![](docs/diagrams/deployment.png)
+
+### Contributing
+
+We use the following coding style standards:
+
+* [src/api](src/api): [PSR-2 Coding Style](https://www.php-fig.org/psr/psr-2/)
+
+The compliance is checked by Travis after every push using `phpcs` and `js` accordingly.
 
 ## Install
 

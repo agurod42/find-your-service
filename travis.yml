@@ -1,0 +1,4 @@
+language: ruby
+php:
+  - 7.0
+script: composer checkstyle
