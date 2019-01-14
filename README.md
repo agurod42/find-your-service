@@ -7,11 +7,12 @@ Find Your Service is an application that allow consumers to search for services.
 You can find running instances on:
 
 * API: https://find-your-service.herokuapp.com
-  * Docs: https://documenter.getpostman.com/view/1952436/RznHKHk5
 * Admin site: https://find-your-service.herokuapp.com/admin 
 * Public site: https://find-your-service.herokuapp.com/public
 
 <sub>To log into the Admin site you should use the following credentials: (admin@findyourservice.io, password)</sub>
+
+API docs are available here: https://documenter.getpostman.com/view/1952436/RznHKHk5
 
 ## Development
 
