@@ -9,8 +9,10 @@ export default class extends React.Component {
     return (
       <Layout>
         <Layout.Header>
-          <Row type='flex' justify='space-between'>
-            <Col />
+          <Row type='flex' align='middle' justify='space-between'>
+            <Col>
+              <img alt='Find Your Service' src={require('../assets/logo.png')} height={32} />
+            </Col>
             <Col>
               <Menu theme='dark' mode='horizontal' defaultSelectedKeys={[location[1]]} style={{ lineHeight: '64px' }}>
                 {userAuthenticated && <Menu.Item><Button ghost onClick={() => this.onLogoutButtonClick()}>Logout</Button></Menu.Item>}
