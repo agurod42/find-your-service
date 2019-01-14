@@ -45,7 +45,7 @@ foreach (['admin', 'public'] as $route) {
             if (file_exists($filePath)) {
                 $fileNameParts = explode('.', $any);
                 $fileExt = strtolower($fileNameParts[count($fileNameParts) - 1]);
-                $fileExtMimeType = ['css' => 'text/css', 'js' => 'text/javascript'];
+                $fileExtMimeType = ['css' => 'text/css', 'js' => 'text/javascript', 'png' => 'image/png'];
                 header('Content-Type: '.$fileExtMimeType[$fileExt]);
                 echo file_get_contents($filePath);
             } else {
