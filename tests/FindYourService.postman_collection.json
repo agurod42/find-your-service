@@ -325,11 +325,6 @@
 						"method": "DELETE",
 						"header": [
 							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
 								"key": "X-Auth-Token",
 								"value": "{{authToken}}",
 								"type": "text"
