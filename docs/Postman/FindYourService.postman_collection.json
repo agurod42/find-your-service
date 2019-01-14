@@ -16,7 +16,11 @@
 							"script": {
 								"id": "fa259ace-bdcd-471a-b3ce-4d4237b7a515",
 								"exec": [
-									"pm.environment.set(\"authToken\", JSON.parse(responseBody).token);"
+									"pm.environment.set(\"authToken\", JSON.parse(responseBody).token);",
+									"pm.test(\"response is ok\", function () {",
+									"   pm.response.to.have.status(200);",
+									"   pm.response.to.have.jsonBody(\"token\");",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -55,6 +59,22 @@
 			"item": [
 				{
 					"name": "index",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fb7fa8eb-e337-4f28-b11c-12947c5beb36",
+								"exec": [
+									"pm.test(\"response is ok\", function () {",
+									"   pm.response.to.have.status(200);",
+									"   pm.response.to.be.json;",
+									"   pm.expect(JSON.parse(responseBody)).to.be.an('array').to.not.be.empty;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -82,6 +102,24 @@
 				},
 				{
 					"name": "indexByDistance",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ffd4245a-7bbb-4deb-9478-9150bf1dcd70",
+								"exec": [
+									"var responseJson = JSON.parse(responseBody);",
+									"pm.test(\"response is ok\", function () {",
+									"   pm.response.to.have.status(200);",
+									"   pm.response.to.be.json;",
+									"   pm.expect(responseJson).to.be.an('array').not.to.be.empty;",
+									"   pm.expect(responseJson[0]).to.deep.have.property('distance');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -96,7 +134,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{apiUrl}}/services?distance=300&distance_to=44.7806,-71.26684",
+							"raw": "{{apiUrl}}/services?distance=10000&distance_to=40.6987576,-74.1036266",
 							"host": [
 								"{{apiUrl}}"
 							],
@@ -106,11 +144,11 @@
 							"query": [
 								{
 									"key": "distance",
-									"value": "300"
+									"value": "10000"
 								},
 								{
 									"key": "distance_to",
-									"value": "44.7806,-71.26684"
+									"value": "40.6987576,-74.1036266"
 								}
 							]
 						}
@@ -119,6 +157,22 @@
 				},
 				{
 					"name": "show",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "57dffd0d-f894-4d36-a8a3-d79fa87647e7",
+								"exec": [
+									"pm.test(\"response is ok\", function () {",
+									"   pm.response.to.have.status(200);",
+									"   pm.response.to.be.json;",
+									"   pm.expect(JSON.parse(responseBody)).to.have.deep.property('id');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -133,13 +187,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{apiUrl}}/services/1",
+							"raw": "{{apiUrl}}/services/10",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
 								"services",
-								"1"
+								"10"
 							]
 						}
 					},
@@ -147,6 +201,24 @@
 				},
 				{
 					"name": "create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "679dee8d-a7ac-472f-b440-90b4350fc91d",
+								"exec": [
+									"var responseJson = JSON.parse(responseBody);",
+									"pm.environment.set(\"lastCreatedId\", responseJson[responseJson.length - 1].id);",
+									"pm.test(\"response is ok\", function () {",
+									"   pm.response.to.have.status(200);",
+									"   pm.response.to.be.json;",
+									"   pm.expect(responseJson).to.be.an('array').to.not.be.empty;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -179,6 +251,25 @@
 				},
 				{
 					"name": "update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "02b5070f-851a-4add-94f2-b368068119e4",
+								"exec": [
+									"var responseJson = JSON.parse(responseBody);",
+									"pm.test(\"response is ok\", function () {",
+									"   pm.response.to.have.status(200);",
+									"   pm.response.to.be.json;",
+									"   pm.expect(responseJson).to.be.an('array').to.not.be.empty;",
+									"   pm.expect(responseJson[responseJson.length - 1]).to.have.property('location_lat', '46.78065');",
+									"   pm.expect(responseJson[responseJson.length - 1]).to.have.property('location_lon', '-71.26684');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -198,13 +289,13 @@
 							"raw": "{\n\t\"location_lat\": 46.78065,\n\t\"location_lon\": -71.26684\n}"
 						},
 						"url": {
-							"raw": "{{apiUrl}}/services/1",
+							"raw": "{{apiUrl}}/services/{{lastCreatedId}}",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
 								"services",
-								"1"
+								"{{lastCreatedId}}"
 							]
 						}
 					},
@@ -212,6 +303,24 @@
 				},
 				{
 					"name": "delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2eee93e0-0b56-4fd0-bafe-4d93737048c0",
+								"exec": [
+									"var responseJson = JSON.parse(responseBody);",
+									"pm.test(\"response is ok\", function () {",
+									"   pm.response.to.have.status(200);",
+									"   pm.response.to.be.json;",
+									"   pm.expect(responseJson).to.be.an('array');",
+									"   pm.expect(responseJson).to.not.deep.include({ id: pm.environment.get(\"lastCreatedId\") });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -231,13 +340,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{apiUrl}}/services/1",
+							"raw": "{{apiUrl}}/services/{{lastCreatedId}}",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
 								"services",
-								"1"
+								"{{lastCreatedId}}"
 							]
 						}
 					},

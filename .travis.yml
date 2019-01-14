@@ -3,6 +3,8 @@ php:
   - 7.0
 install:
   - composer install --prefer-dist
+  - npm install newman
 script:
   - composer checkstyle-js
   - composer checkstyle-php
+  - node_modules/.bin/newman run docs/postman/FindYourService.postman_collection.json --color auto --disable-unicode --global-var "apiUrl=https://find-your-service.herokuapp.com"
