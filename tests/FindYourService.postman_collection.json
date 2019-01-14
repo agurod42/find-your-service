@@ -48,7 +48,8 @@
 							"path": [
 								"auth"
 							]
-						}
+						},
+						"description": "Authenticate a user and return the token if the provided credentials are correct."
 					},
 					"response": []
 				}
@@ -96,7 +97,8 @@
 							"path": [
 								"services"
 							]
-						}
+						},
+						"description": "List all services. If parameters are provided then the services are filtered.\n    \nAvailable filters:\n    \nname | type | description\n-----|------|------------\n`$title` | string | Substring of service's title\n`$distance` | number | Distance to service from `$distance_to`\n`$distance_to` | string | String representing a coordinate in the format `$latitude,$longitude` from which the distance is calculated"
 					},
 					"response": []
 				},
@@ -151,7 +153,8 @@
 									"value": "40.6987576,-74.1036266"
 								}
 							]
-						}
+						},
+						"description": "List all services. If parameters are provided then the services are filtered.\n    \nAvailable filters:\n    \nname | type | description\n-----|------|------------\n`$title` | string | Substring of service's title\n`$distance` | number | Distance to service from `$distance_to`\n`$distance_to` | string | String representing a coordinate in the format `$latitude,$longitude` from which the distance is calculated"
 					},
 					"response": []
 				},
@@ -195,7 +198,8 @@
 								"services",
 								"10"
 							]
-						}
+						},
+						"description": "Show the service with id `$id`."
 					},
 					"response": []
 				},
@@ -245,7 +249,8 @@
 							"path": [
 								"services"
 							]
-						}
+						},
+						"description": "Create a new service and return the full list of services."
 					},
 					"response": []
 				},
@@ -297,7 +302,8 @@
 								"services",
 								"{{lastCreatedId}}"
 							]
-						}
+						},
+						"description": "Update the service with id `$id` and return the full list of services."
 					},
 					"response": []
 				},
@@ -343,7 +349,8 @@
 								"services",
 								"{{lastCreatedId}}"
 							]
-						}
+						},
+						"description": "Delete the service with id `$id` and return the full list of services."
 					},
 					"response": []
 				}
