@@ -1,30 +1,32 @@
-import { Card, Col, Icon, Input, Layout, Row, Select } from 'antd';
-import React from 'react';
-import Img from 'react-image';
-import ServiceService from '@/services/service';
+import { Card, Col, Icon, Input, Layout, Row, Select } from 'antd'
+import React from 'react'
+import Img from 'react-image'
+import ServiceService from '@/services/service'
 
 export default class IndexPage extends React.Component {
-
-  state = {
-    geolocation: false,
-    q: {},
-    services: []
+  constructor (props) {
+    super(props)
+    this.state = {
+      geolocation: false,
+      q: {},
+      services: []
+    }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.setState({
           geolocation: true,
           q: { ...this.state.q, distance_to: `${position.coords.latitude},${position.coords.longitude}` }
-        });
-      });
+        })
+      })
     }
 
-    this.onQueryInputChange({ target: { value: '' } });
+    this.onQueryInputChange({ target: { value: '' } })
   }
 
-  render() {
+  render () {
     return (
       <Layout.Content style={{ width: '100%' }}>
         <Row type='flex' justify='center'>
@@ -52,10 +54,10 @@ export default class IndexPage extends React.Component {
           ))}
         </Row>
       </Layout.Content>
-    );
+    )
   }
 
-  renderDistanceSelect() {
+  renderDistanceSelect () {
     return (
       <Select defaultValue='anywhere' onChange={(e) => this.onDistanceSelectChange(e)}>
         <Select.Option disabled={!this.state.geolocation} value='1000'>1 km</Select.Option>
@@ -67,35 +69,34 @@ export default class IndexPage extends React.Component {
         <Select.Option disabled={!this.state.geolocation} value='100000'>100 km</Select.Option>
         <Select.Option value='anywhere'>Anywhere</Select.Option>
       </Select>
-    );
+    )
   }
 
-  onQueryInputChange(e) {
+  onQueryInputChange (e) {
     ServiceService
       .index({ ...this.state.q, title: e.target.value })
       .then(res => {
-        this.setState({ services: res.data });
+        this.setState({ services: res.data })
       })
       .catch(err => {
-        console.log(err);
-      });
+        console.log(err)
+      })
   }
 
-  onDistanceSelectChange(distance) {
-    let q = {};
+  onDistanceSelectChange (distance) {
+    let q = {}
 
     if (distance !== 'anywhere') {
-      q.distance = distance;
+      q.distance = distance
     }
 
     ServiceService
       .index({ ...this.state.q, ...q })
       .then(res => {
-        this.setState({ services: res.data });
+        this.setState({ services: res.data })
       })
       .catch(err => {
-        console.log(err);
-      });
+        console.log(err)
+      })
   }
-
 }
