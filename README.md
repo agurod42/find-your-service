@@ -27,7 +27,7 @@ We use the following coding style standards:
 [![StandardJS](https://img.shields.io/badge/webapp--public-StandardJS-%23f1e05a.svg)](https://standardjs.com)
 
 
-Source compliance is checked automatically by Travis after every push. It uses `phpcs` and `eslint` for `php` and `js` sources respectively.
+Source compliance is checked automatically by Travis after every push. It uses `phpcs` and `standard` for `php` and `js` sources respectively.
 
 ## Deployment
 

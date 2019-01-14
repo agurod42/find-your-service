@@ -4,4 +4,5 @@ php:
 install:
   - composer install --prefer-dist
 script:
-  - composer checkstyle
+  - composer checkstyle-js
+  - composer checkstyle-php
