@@ -40,7 +40,7 @@ class ServicePage extends React.Component {
             { dataIndex: 'state', title: 'State' },
             { dataIndex: 'zip_code', title: 'ZIP Code' },
             { dataIndex: 'location', title: 'Location', render: (_, record) => `${record.location_lat},${record.location_lon}` },
-            { render: (_, record) => this.renderRowActions(record), width: 80 }
+            { render: (_, record) => this.renderRowActions(record), width: 96 }
           ]}
           dataSource={this.state.services}
           rowKey='id'
