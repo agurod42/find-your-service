@@ -7,4 +7,4 @@ install:
 script:
   - composer checkstyle-js
   - composer checkstyle-php
-  - node_modules/.bin/newman run docs/postman/FindYourService.postman_collection.json --color auto --disable-unicode --global-var "apiUrl=https://find-your-service.herokuapp.com"
+  - node_modules/.bin/newman run $TRAVIS_BUILD_DIR/docs/postman/FindYourService.postman_collection.json --color auto --disable-unicode --global-var "apiUrl=https://find-your-service.herokuapp.com"
