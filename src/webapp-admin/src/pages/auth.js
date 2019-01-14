@@ -1,18 +1,19 @@
-import { Alert, Card, Form, Layout } from 'antd';
-import React from 'react';
-import AuthForm from '@/components/form/auth';
-import AuthService from '@/services/auth';
+import { Alert, Card, Form, Layout } from 'antd'
+import React from 'react'
+import AuthForm from '@/components/form/auth'
+import AuthService from '@/services/auth'
 
 class AuthPage extends React.Component {
-
-  formRef = React.createRef()
-
-  state = {
-    error: false,
-    loading: false
+  constructor (props) {
+    super(props)
+    this.formRef = React.createRef()
+    this.state = {
+      error: false,
+      loading: false
+    }
   }
 
-  render() {
+  render () {
     return (
       <Layout.Content style={{ width: 384 }}>
         <Card title='Login'>
@@ -26,28 +27,27 @@ class AuthPage extends React.Component {
           />
         </Card>
       </Layout.Content>
-    );
+    )
   }
 
-  renderFormItem(name, children) {
-    return this.props.form.getFieldDecorator(name, { rules: this.formRules[name] })(children);
+  renderFormItem (name, children) {
+    return this.props.form.getFieldDecorator(name, { rules: this.formRules[name] })(children)
   }
 
-  onFormSubmit() {
-    this.setState({ loading: true });
+  onFormSubmit () {
+    this.setState({ loading: true })
 
-    const data = this.formRef.current.getForm().getFieldsValue();
+    const data = this.formRef.current.getForm().getFieldsValue()
 
     AuthService
       .authenticate(data.email, data.password)
       .then(() => {
-        this.props.history.push('/');
+        this.props.history.push('/')
       })
       .catch(err => {
-        this.setState({ error: err.response.data.error, loading: false });
-      });
+        this.setState({ error: err.response.data.error, loading: false })
+      })
   }
-
 }
 
-export default Form.create()(AuthPage);
+export default Form.create()(AuthPage)
