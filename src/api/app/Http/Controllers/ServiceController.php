@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Validator;
 
 class ServiceController extends Controller
 {
@@ -57,6 +58,21 @@ class ServiceController extends Controller
      */
     public function create(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|unique:services',
+            'description' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zip_code' => 'required',
+            'location_lat' => 'required|numeric',
+            'location_lon' => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 400);
+        }
+
         $service = Service::create($request->all());
 
         return response()->json(Service::all(), 200);
@@ -71,6 +87,16 @@ class ServiceController extends Controller
      */
     public function update($id, Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'title' => 'nullable|unique:services',
+            'location_lat' => 'nullable|numeric',
+            'location_lon' => 'nullable|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 400);
+        }
+
         $service = Service::findOrFail($id);
         $service->update($request->all());
 

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "634f5ee9-e23d-4b49-aa02-9bc6e7392105",
+		"_postman_id": "863807ab-6cab-44f2-af6c-8a3f48903b12",
 		"name": "FindYourService",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -103,7 +103,7 @@
 					"response": []
 				},
 				{
-					"name": "indexByDistance",
+					"name": "index - distance",
 					"event": [
 						{
 							"listen": "test",
@@ -204,6 +204,49 @@
 					"response": []
 				},
 				{
+					"name": "show - inexistent",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "57dffd0d-f894-4d36-a8a3-d79fa87647e7",
+								"exec": [
+									"pm.test(\"response is not found\", function () {",
+									"   pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiUrl}}/services/10000",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"services",
+								"10000"
+							]
+						},
+						"description": "Show the service with id `$id`."
+					},
+					"response": []
+				},
+				{
 					"name": "create",
 					"event": [
 						{
@@ -240,6 +283,486 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n\t\"title\": \"Test Service\",\n\t\"description\": \"Service created in order to test the FYS platform\",\n\t\"address\": \"2255 rue de l'Université\",\n\t\"city\": \"Québec\",\n\t\"state\": \"Quebec\",\n\t\"zip_code\": 10000,\n\t\"location_lat\": 46.78060,\n\t\"location_lon\": -71.26684\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/services",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"services"
+							]
+						},
+						"description": "Create a new service and return the full list of services."
+					},
+					"response": []
+				},
+				{
+					"name": "create - no title",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "679dee8d-a7ac-472f-b440-90b4350fc91d",
+								"exec": [
+									"pm.test(\"response is err\", function () {",
+									"   pm.response.to.have.status(400);",
+									"   pm.response.to.be.json;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"description\": \"Service created in order to test the FYS platform\",\n\t\"address\": \"2255 rue de l'Université\",\n\t\"city\": \"Québec\",\n\t\"state\": \"Quebec\",\n\t\"zip_code\": 10000,\n\t\"location_lat\": 46.78060,\n\t\"location_lon\": -71.26684\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/services",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"services"
+							]
+						},
+						"description": "Create a new service and return the full list of services."
+					},
+					"response": []
+				},
+				{
+					"name": "create - no description",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "679dee8d-a7ac-472f-b440-90b4350fc91d",
+								"exec": [
+									"pm.test(\"response is err\", function () {",
+									"   pm.response.to.have.status(400);",
+									"   pm.response.to.be.json;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Test Service\",\n\t\"address\": \"2255 rue de l'Université\",\n\t\"city\": \"Québec\",\n\t\"state\": \"Quebec\",\n\t\"zip_code\": 10000,\n\t\"location_lat\": 46.78060,\n\t\"location_lon\": -71.26684\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/services",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"services"
+							]
+						},
+						"description": "Create a new service and return the full list of services."
+					},
+					"response": []
+				},
+				{
+					"name": "create - no address",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "679dee8d-a7ac-472f-b440-90b4350fc91d",
+								"exec": [
+									"pm.test(\"response is err\", function () {",
+									"   pm.response.to.have.status(400);",
+									"   pm.response.to.be.json;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Test Service\",\n\t\"description\": \"Service created in order to test the FYS platform\",\n\t\"city\": \"Québec\",\n\t\"state\": \"Quebec\",\n\t\"zip_code\": 10000,\n\t\"location_lat\": 46.78060,\n\t\"location_lon\": -71.26684\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/services",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"services"
+							]
+						},
+						"description": "Create a new service and return the full list of services."
+					},
+					"response": []
+				},
+				{
+					"name": "create - no city",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "679dee8d-a7ac-472f-b440-90b4350fc91d",
+								"exec": [
+									"pm.test(\"response is err\", function () {",
+									"   pm.response.to.have.status(400);",
+									"   pm.response.to.be.json;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Test Service\",\n\t\"description\": \"Service created in order to test the FYS platform\",\n\t\"address\": \"2255 rue de l'Université\",\n\t\"state\": \"Quebec\",\n\t\"zip_code\": 10000,\n\t\"location_lat\": 46.78060,\n\t\"location_lon\": -71.26684\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/services",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"services"
+							]
+						},
+						"description": "Create a new service and return the full list of services."
+					},
+					"response": []
+				},
+				{
+					"name": "create - no state",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "679dee8d-a7ac-472f-b440-90b4350fc91d",
+								"exec": [
+									"pm.test(\"response is err\", function () {",
+									"   pm.response.to.have.status(400);",
+									"   pm.response.to.be.json;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Test Service\",\n\t\"description\": \"Service created in order to test the FYS platform\",\n\t\"address\": \"2255 rue de l'Université\",\n\t\"city\": \"Québec\",\n\t\"zip_code\": 10000,\n\t\"location_lat\": 46.78060,\n\t\"location_lon\": -71.26684\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/services",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"services"
+							]
+						},
+						"description": "Create a new service and return the full list of services."
+					},
+					"response": []
+				},
+				{
+					"name": "create - no zip_code",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "679dee8d-a7ac-472f-b440-90b4350fc91d",
+								"exec": [
+									"pm.test(\"response is err\", function () {",
+									"   pm.response.to.have.status(400);",
+									"   pm.response.to.be.json;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Test Service\",\n\t\"description\": \"Service created in order to test the FYS platform\",\n\t\"address\": \"2255 rue de l'Université\",\n\t\"city\": \"Québec\",\n\t\"state\": \"Quebec\",\n\t\"location_lat\": 46.78060,\n\t\"location_lon\": -71.26684\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/services",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"services"
+							]
+						},
+						"description": "Create a new service and return the full list of services."
+					},
+					"response": []
+				},
+				{
+					"name": "create - no latitude",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "679dee8d-a7ac-472f-b440-90b4350fc91d",
+								"exec": [
+									"pm.test(\"response is err\", function () {",
+									"   pm.response.to.have.status(400);",
+									"   pm.response.to.be.json;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Test Service\",\n\t\"description\": \"Service created in order to test the FYS platform\",\n\t\"address\": \"2255 rue de l'Université\",\n\t\"city\": \"Québec\",\n\t\"state\": \"Quebec\",\n\t\"zip_code\": 10000,\n\t\"location_lon\": -71.26684\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/services",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"services"
+							]
+						},
+						"description": "Create a new service and return the full list of services."
+					},
+					"response": []
+				},
+				{
+					"name": "create - no longitude",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "679dee8d-a7ac-472f-b440-90b4350fc91d",
+								"exec": [
+									"pm.test(\"response is err\", function () {",
+									"   pm.response.to.have.status(400);",
+									"   pm.response.to.be.json;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Test Service\",\n\t\"description\": \"Service created in order to test the FYS platform\",\n\t\"address\": \"2255 rue de l'Université\",\n\t\"city\": \"Québec\",\n\t\"state\": \"Quebec\",\n\t\"zip_code\": 10000,\n\t\"location_lat\": 46.78060,\n\t\"location_lon\": -71.26684\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/services",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"services"
+							]
+						},
+						"description": "Create a new service and return the full list of services."
+					},
+					"response": []
+				},
+				{
+					"name": "create - invalid latitude",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "679dee8d-a7ac-472f-b440-90b4350fc91d",
+								"exec": [
+									"pm.test(\"response is err\", function () {",
+									"   pm.response.to.have.status(400);",
+									"   pm.response.to.be.json;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Test Service\",\n\t\"description\": \"Service created in order to test the FYS platform\",\n\t\"address\": \"2255 rue de l'Université\",\n\t\"city\": \"Québec\",\n\t\"state\": \"Quebec\",\n\t\"zip_code\": 10000,\n\t\"location_lat\": \"invalid\",\n\t\"location_lon\": -71.26684\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/services",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"services"
+							]
+						},
+						"description": "Create a new service and return the full list of services."
+					},
+					"response": []
+				},
+				{
+					"name": "create - invalid longitude",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "679dee8d-a7ac-472f-b440-90b4350fc91d",
+								"exec": [
+									"pm.test(\"response is err\", function () {",
+									"   pm.response.to.have.status(400);",
+									"   pm.response.to.be.json;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Test Service\",\n\t\"description\": \"Service created in order to test the FYS platform\",\n\t\"address\": \"2255 rue de l'Université\",\n\t\"city\": \"Québec\",\n\t\"state\": \"Quebec\",\n\t\"zip_code\": 10000,\n\t\"location_lat\": 46.78060,\n\t\"location_lon\": \"invalid\"\n}"
 						},
 						"url": {
 							"raw": "{{apiUrl}}/services",
@@ -308,6 +831,152 @@
 					"response": []
 				},
 				{
+					"name": "update - inexistent",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "02b5070f-851a-4add-94f2-b368068119e4",
+								"exec": [
+									"pm.test(\"response is not found\", function () {",
+									"   pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"location_lat\": 46.78065,\n\t\"location_lon\": -71.26684\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/services/100000",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"services",
+								"100000"
+							]
+						},
+						"description": "Update the service with id `$id` and return the full list of services."
+					},
+					"response": []
+				},
+				{
+					"name": "update - invalid latitude",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "02b5070f-851a-4add-94f2-b368068119e4",
+								"exec": [
+									"pm.test(\"response is err\", function () {",
+									"   pm.response.to.have.status(400);",
+									"   pm.response.to.be.json;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"location_lat\": \"invalid\",\n\t\"location_lon\": -71.26684\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/services/{{lastCreatedId}}",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"services",
+								"{{lastCreatedId}}"
+							]
+						},
+						"description": "Update the service with id `$id` and return the full list of services."
+					},
+					"response": []
+				},
+				{
+					"name": "update - invalid longitude",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "02b5070f-851a-4add-94f2-b368068119e4",
+								"exec": [
+									"pm.test(\"response is err\", function () {",
+									"   pm.response.to.have.status(400);",
+									"   pm.response.to.be.json;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"location_lat\": 46.78065,\n\t\"location_lon\": \"invalid\"\n}"
+						},
+						"url": {
+							"raw": "{{apiUrl}}/services/{{lastCreatedId}}",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"services",
+								"{{lastCreatedId}}"
+							]
+						},
+						"description": "Update the service with id `$id` and return the full list of services."
+					},
+					"response": []
+				},
+				{
 					"name": "delete",
 					"event": [
 						{
@@ -348,6 +1017,49 @@
 							"path": [
 								"services",
 								"{{lastCreatedId}}"
+							]
+						},
+						"description": "Delete the service with id `$id` and return the full list of services."
+					},
+					"response": []
+				},
+				{
+					"name": "delete - inexistent",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2eee93e0-0b56-4fd0-bafe-4d93737048c0",
+								"exec": [
+									"pm.test(\"response is not found\", function () {",
+									"   pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{apiUrl}}/services/100000",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"services",
+								"100000"
 							]
 						},
 						"description": "Delete the service with id `$id` and return the full list of services."
