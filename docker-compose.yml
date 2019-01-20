@@ -1,0 +1,56 @@
+version: '3'
+services:
+  api:
+    container_name: fys_api
+    image: nginx:latest
+    depends_on:
+      - php-fpm
+    ports:
+      - 8088:80
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+
+  webapp-admin:
+    container_name: fys_webapp_admin
+    build: 
+      context: .
+      dockerfile: ./docker/webapp-admin/Dockerfile
+    ports:
+      - 8089:80
+
+  webapp-public:
+    container_name: fys_webapp_public
+    build: 
+      context: .
+      dockerfile: ./docker/webapp-public/Dockerfile
+    ports:
+      - 8090:80
+
+  php-fpm:
+    container_name: fys_php
+    build: ./docker/php-fpm
+    depends_on:
+      - postgres
+    environment:
+      - APP_NAME=FindYourService
+      - APP_DEBUG=false
+      - DB_CONNECTION=pgsql
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_DATABASE=postgres
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - JWT_SECRET=agurodriguez
+    volumes:
+      - ./src/api:/var/www/html
+
+  postgres:
+    container_name: fys_postgres
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5438:5432
+    volumes:
+      - ./data:/var/lib/postgresql/data

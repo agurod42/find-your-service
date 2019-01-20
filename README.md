@@ -33,13 +33,26 @@ Source compliance is checked automatically by Travis after every push. It uses `
 
 ## Deployment
 
+### Docker
+
+1. Run `docker-compose up`
+
+2. Initialize the database (First time)
+
+    ```
+    docker-compose exec php-fpm php artisan migrate
+    docker-compose exec php-fpm php artisan db:seed
+    ```
+
+3. Navigate to running instances:
+
+    * API: http://localhost:8088
+    * Admin site: http://localhost:8089
+    * Public site: http://localhost:8090
+
 ### Heroku
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/agurodriguez/find-your-service/tree/master)
-
-### Docker
-
-<!-- TODO -->
 
 ## License
 
